@@ -1,4 +1,5 @@
-import {test, expect} from '@playwright/test' 
+import {test, expect} from '@playwright/test'
+import { NAVBAR } from '../utils/locators'; 
 
 //Navigation
 test('Verify "All books" link is visible', async({page})=> {
