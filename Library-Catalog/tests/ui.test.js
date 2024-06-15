@@ -53,6 +53,7 @@ test ('verify "All books" is visible after user login', async ({page})=> {
     expect(page.url()).toBe(TEST_URL.TEST_CATALOG_URL)
 }) 
 
+//User Login elements
 test ('verify "Welcome message" is visible after user login', async({page})=>{
       
       await page.goto(TEST_URL.TEST_LOGIN_URL) 
@@ -67,7 +68,7 @@ test ('verify "Welcome message" is visible after user login', async({page})=>{
       await expect(page.locator(LOGGED_F0RM.WELCOME_MESSAGE)).toBeVisible();
 }) 
 
-test ('verify "My books button" is visible', async ({page})=> {
+test ('verify "My books button" is visible after user login', async ({page})=> {
     await page.goto(TEST_URL.TEST_LOGIN_URL) 
       await page.locator(LOGINFORM.LOGIN_EMAIL).fill(USER_DETAILS.USER_EMAIL)
       await page.locator(LOGINFORM.LOGIN_PASSWORD).fill(USER_DETAILS.USER_PASSWORD)
@@ -88,4 +89,19 @@ test ('verify "Logout button" is visible', async({page})=> {
     await page.locator(LOGINFORM.LOGIN_PASSWORD).fill(USER_DETAILS.USER_PASSWORD)
    await page.locator(LOGINFORM.LOGIN_BUTTON).click() 
     await expect(page.locator(LOGGED_F0RM.LOGOUT_BUTTON)).toBeVisible();
+})
+
+//User Login  
+test ('User Login wiht valid credentials', async({page})=>{
+    await page.goto(TEST_URL.TEST_LOGIN_URL) 
+
+    await expect(page.locator(LOGINFORM.LOGIN_FORM)).toBeVisible;
+    await (page.locator(LOGINFORM.LOGIN_EMAIL).fill(USER_DETAILS.USER_EMAIL))
+    await (page.locator(LOGINFORM.LOGIN_PASSWORD)).fill(USER_DETAILS.USER_PASSWORD)
+
+    await (page.locator(LOGINFORM.LOGIN_BUTTON)).click()
+
+    await page.waitForURL(TEST_URL.TEST_CATALOG_URL)
+    await expect(page.url()).toBe(TEST_URL.TEST_CATALOG_URL)
+    
 })
