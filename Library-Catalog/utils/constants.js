@@ -12,8 +12,29 @@ const USER_DETAILS= {
     USER_PASSWORD: '123456'
 }
 
+const MESSAGE = {
+    ALERT_MESSAGE:'All fileds are required'
+} 
+
+const ADD_BOOK ={
+    TITLE: 'New book title',
+    DESCRIPTION: 'New book description',
+    IMAGE:'https://example.com/book-image.jpg',
+    BOOK_OPTIONS:{
+      FICTION:'Fiction',
+      ROMANCE:'Romance',      
+      MISTERY:'Mistery',
+      CLASIC:'Clasic',
+      OTHER:'Other'
+    }
+}
+
 export {
     BASE_URL,
     TEST_URL,
-    USER_DETAILS
+    USER_DETAILS,
+    MESSAGE,
+    ADD_BOOK
+    
+
 }

@@ -17,10 +17,20 @@ const LOGGED_F0RM={
     MY_BOOKS_BUTTON:'a[href="/profile"]',
     ADD_BOOK_BUTTON: 'a[href="/create"]',
     LOGOUT_BUTTON:'a[href="javascript:void(0)"]'
+} 
+
+const BOOKADITION ={
+    ADD_MEW_BOOK_FORM:'#create-form',
+    BOOK_TITLE:'input[id="title"]',
+    BOOK_DESCRIPTION:'textarea[id="description"]',
+    BOOK_IMAGE:'input[id="image"]',
+    BOOK_OPTIONS:'#type',
+    ADD_NEW_BOOK_BUTTON: '#create-form input[type="submit"]'
 }
 
 export {
     NAVBAR,
     LOGINFORM,
-    LOGGED_F0RM
+    LOGGED_F0RM,
+    BOOKADITION
 }
