@@ -9,7 +9,7 @@ This repo contains SPA testing with Playwrigth and various tasks and problems re
 * [License](#license) 
 
 ## General Information
-The repo contains project related to testingSPA with Playwright and my solutions to number of tasks and problems using Playwright as a toll to test SPA and UI functionality. 
+The repo contains project related to testing SPA with Playwright and my solutions to tasks and problems using Playwright as a toll to test UI functionality. 
 ## Technologies Used
 - JS ES6, Playwright
 ## Acknowledgements
