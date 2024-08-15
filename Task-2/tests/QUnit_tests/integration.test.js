@@ -11,7 +11,11 @@ let myEvent = {
     title: "", 
     description: "", 
     imageUrl: "/images/Pretty-Woman.jpg" 
-}
+} 
+
+let lastCreatedEventId=" ";
+
+let random = Math.floor(Math.random() * 10000);
 
 QUnit.config.reorder = false; 
 
@@ -162,8 +166,7 @@ QUnit.module("Evant functionalities", ()=>{
     QUnit.test("create event testing", async(assert)=>{
         //arrange
         let path="/data/theaters";
-        let random = Math.floor(Math.random() * 10000);
-        let randomTitle="Random title"+random;
+        let randomTitle="Random title:"+random;
         myEvent.title=randomTitle;
         let randomDescription="Random_description:"+random
         myEvent.description=randomDescription; 
@@ -183,8 +186,113 @@ QUnit.module("Evant functionalities", ()=>{
 
         console.log(json)
 
-        assert.ok(response.ok,"response is ok")
+        assert.ok(response.ok,"response is ok") 
 
+        assert.ok(json.hasOwnProperty('author'), "Author exists")
+        assert.equal(json.author, myEvent.author, "author is expected")
+        assert.strictEqual(typeof json.author,'string', "author is from expected type")
+        
+        assert.ok(json.hasOwnProperty('date'), "date exists")
+        assert.equal(json.date, myEvent.date, "date is expected")
+        assert.strictEqual(typeof json.date,'string', "date is from expected type")
+
+        assert.ok(json.hasOwnProperty('title'), "title exists")
+        assert.equal(json.title, myEvent.title, "title is expected")
+        assert.strictEqual(typeof json.title,'string', "title is from expected type") 
+
+        assert.ok(json.hasOwnProperty('description'), "description exists")
+        assert.equal(json.description, myEvent.description, "description is expected")
+        assert.strictEqual(typeof json.description,'string', "description is from expected type")
+
+        assert.ok(json.hasOwnProperty('imageUrl'), "imageUrl exists")
+        assert.equal(json.imageUrl, myEvent.imageUrl, "imageUrl is expected")
+        assert.strictEqual(typeof json.imageUrl,'string', "imageUrl is from expected type")
+
+        assert.ok(json.hasOwnProperty('_createdOn'), "_createdOn exists")
+        assert.strictEqual(typeof json._createdOn,'number', "_createdOn is from expected type")
+
+        assert.ok(json.hasOwnProperty('_id'), "_id exists")
+        assert.strictEqual(typeof json._id,'string', "_id is from expected type")
+
+        assert.ok(json.hasOwnProperty('_ownerId'), "_ownerId exists")
+        assert.strictEqual(typeof json._ownerId,'string', "_ownerId is from expected type") 
+        
+        lastCreatedEventId=json._id
+
+    })
+    QUnit.test("edit event testing", async (assert)=>{
+        //arrange 
+        let path ="/data/theaters/";
+
+        let editedTitle="EditedTitle:" +random 
+        myEvent.title=editedTitle; 
+
+        //act 
+        let response = await fetch(baseURL+path+`/${lastCreatedEventId}`, {
+             method:"PUT",
+             headers:{
+                'content-type':'application/json',
+                'X-Authorization':token
+             },
+             body: JSON.stringify(myEvent)
+        }) 
+
+        let json=await response.json(); 
+
+        console.log(json) 
+
+        assert.ok(response.ok, "response is ok")
+       
+        assert.ok(json.hasOwnProperty('author'), "Author exists")
+        assert.equal(json.author, myEvent.author, "author is expected")
+        assert.strictEqual(typeof json.author,'string', "author is from expected type")
+        
+        assert.ok(json.hasOwnProperty('date'), "date exists")
+        assert.equal(json.date, myEvent.date, "date is expected")
+        assert.strictEqual(typeof json.date,'string', "date is from expected type")
+
+        assert.ok(json.hasOwnProperty('title'), "title exists")
+        assert.equal(json.title, myEvent.title, "title is expected")
+        assert.strictEqual(typeof json.title,'string', "title is from expected type") 
+
+        assert.ok(json.hasOwnProperty('description'), "description exists")
+        assert.equal(json.description, myEvent.description, "description is expected")
+        assert.strictEqual(typeof json.description,'string', "description is from expected type")
+
+        assert.ok(json.hasOwnProperty('imageUrl'), "imageUrl exists")
+        assert.equal(json.imageUrl, myEvent.imageUrl, "imageUrl is expected")
+        assert.strictEqual(typeof json.imageUrl,'string', "imageUrl is from expected type")
+
+        assert.ok(json.hasOwnProperty('_createdOn'), "_createdOn exists")
+        assert.strictEqual(typeof json._createdOn,'number', "_createdOn is from expected type")
+
+        assert.ok(json.hasOwnProperty('_id'), "_id exists")
+        assert.strictEqual(typeof json._id,'string', "_id is from expected type")
+
+        assert.ok(json.hasOwnProperty('_ownerId'), "_ownerId exists")
+        assert.strictEqual(typeof json._ownerId,'string', "_ownerId is from expected type") 
+
+        assert.ok(json.hasOwnProperty('_updatedOn'), "_updatedOn exists")
+        assert.strictEqual(typeof json._updatedOn,'number', "_updatedOn is from expected type") 
+        
+        lastCreatedEventId=json._id
+
+    })
+    QUnit.test("delete event testing", async (assert)=>{
+        //arrange
+        let path="/data/theaters/"
+
+        //act 
+
+        let response = await fetch(baseURL+path+`/${lastCreatedEventId}`, {
+            method:"DELETE",
+            headers:{
+                'X-Authorization':token
+            }
+        }) 
+
+        //assert
+        assert.ok(response.ok,"response is ok")
     })
       
 })
