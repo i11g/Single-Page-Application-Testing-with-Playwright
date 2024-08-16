@@ -12,10 +12,8 @@ function solve() {
 
      let checkListElement=document.getElementById('check-list')
      let upcomingListElement=document.getElementById('upcoming-list')
-     let finishedListElement=document.getElementById('upcoming-list')
-
-     let buttonClear=document.getElementById('clear') 
-
+     let finishedListElement=document.getElementById('finished-list')
+     
      buttonAdd.addEventListener('click', onNext) 
 
      function onNext(e) {
@@ -119,8 +117,36 @@ function solve() {
 
            buttonAdd.disabled=false;
            liLastCheckElement.remove() 
+          
+           finishedButton.addEventListener('click', onFinish)
 
-           
+           function onFinish() {
+              
+              let liFinishedElement=document.createElement('li')
+              liFinishedElement.setAttribute('class', 'event-content') 
+
+              let articleFinishedElement=document.createElement('article')
+
+              articleFinishedElement=articleUpcomingElement
+
+              liFinishedElement.appendChild(articleFinishedElement)
+
+              finishedListElement.appendChild(liFinishedElement)
+
+              liUpcomingElement.remove()
+              
+              let buttonClear=document.getElementById('clear') 
+
+              buttonClear.addEventListener('click', onClear)
+
+                  function onClear() {
+                    
+                    liFinishedElement.remove()
+                    buttonAdd.disabled=false;
+              
+                     }
+           } 
+
            
       }
 
