@@ -1,5 +1,5 @@
 # UI Testing with Playwright 
-This repo contains SPA testing with Playwrigth and various tasks and problems related to using Playwright as a test tool.  
+This repo contains various tasks and problems related to using Playwright as a test tool, including SPA testing.  
 
 ## Table of Contents
 * [General Info](#general-information)
